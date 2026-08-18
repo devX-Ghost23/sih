@@ -1,1 +1,142 @@
+import Sidebar from "../../components/layout/Sidebar";
+import Topbar from "../../components/layout/Topbar";
+import { FilePlus2 } from "lucide-react";
 
+function RaiseRequirement() {
+  return (
+    <div className="bg-slate-100 min-h-screen">
+      <Sidebar />
+
+      <div className="ml-64">
+        <Topbar />
+
+        <main className="p-8">
+
+          {/* Heading */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3">
+              <FilePlus2 className="text-emerald-600" size={34} />
+              <div>
+                <h1 className="text-3xl font-bold text-slate-800">
+                  Raise Requirement
+                </h1>
+
+                <p className="text-slate-500 mt-1">
+                  Submit your material requirement.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Form Card */}
+
+          <div className="bg-white rounded-2xl shadow-md p-8">
+
+            <form className="space-y-6">
+
+              {/* Requirement */}
+
+              <div>
+                <label className="block font-semibold mb-2">
+                  Requirement Title
+                </label>
+
+                <input
+                  type="text"
+                  placeholder="Example : Need 50 Office Chairs"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+              </div>
+
+              {/* Category */}
+
+              <div>
+                <label className="block font-semibold mb-2">
+                  Category
+                </label>
+
+                <select className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
+
+                  <option>Select Category</option>
+                  <option>Furniture</option>
+                  <option>Electronics</option>
+                  <option>Plastic</option>
+                  <option>Metal</option>
+                  <option>Paper</option>
+
+                </select>
+              </div>
+
+              {/* Quantity */}
+
+              <div>
+                <label className="block font-semibold mb-2">
+                  Quantity Required
+                </label>
+
+                <input
+                  type="number"
+                  placeholder="Example : 20"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+              </div>
+
+              {/* Location */}
+
+              <div>
+                <label className="block font-semibold mb-2">
+                  Preferred Location
+                </label>
+
+                <input
+                  type="text"
+                  placeholder="Enter location"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+              </div>
+
+              {/* Description */}
+
+              <div>
+                <label className="block font-semibold mb-2">
+                  Description
+                </label>
+
+                <textarea
+                  rows="5"
+                  placeholder="Describe your requirement..."
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                ></textarea>
+              </div>
+
+              {/* Buttons */}
+
+              <div className="flex justify-end gap-4 pt-2">
+
+                <button
+                  type="reset"
+                  className="px-6 py-3 rounded-lg border border-slate-300 hover:bg-slate-100 transition"
+                >
+                  Clear
+                </button>
+
+                <button
+                  type="submit"
+                  className="px-6 py-3 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition"
+                >
+                  Submit Requirement
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </main>
+      </div>
+    </div>
+  );
+}
+
+export default RaiseRequirement;
