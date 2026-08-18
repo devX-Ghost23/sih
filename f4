@@ -1,1 +1,67 @@
+import {
+  LayoutDashboard,
+  FilePlus2,
+  Package,
+  Clock,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
+function Sidebar() {
+  return (
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-slate-900 text-white shadow-lg">
+
+      {/* Logo */}
+      <div className="p-6 border-b border-slate-700">
+        <h1 className="text-3xl font-bold text-emerald-400">
+          ♻ ReLoop
+        </h1>
+
+        <p className="text-sm text-slate-400 mt-1">
+          Ticket Raiser
+        </p>
+      </div>
+
+      {/* Menu */}
+      <nav className="mt-6 flex flex-col gap-2 px-3">
+
+        <button className="flex items-center gap-3 p-3 rounded-lg bg-emerald-600">
+          <LayoutDashboard size={20} />
+          Dashboard
+        </button>
+
+        <button className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition">
+          <FilePlus2 size={20} />
+          Raise Requirement
+        </button>
+
+        <button className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition">
+          <Package size={20} />
+          Declare Surplus
+        </button>
+
+        <button className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition">
+          <Clock size={20} />
+          My Requests
+        </button>
+
+        <button className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition">
+          <Settings size={20} />
+          Settings
+        </button>
+
+      </nav>
+
+      {/* Logout */}
+      <div className="absolute bottom-6 left-3 right-3">
+        <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-red-500 hover:bg-red-600 transition">
+          <LogOut size={20} />
+          Logout
+        </button>
+      </div>
+
+    </aside>
+  );
+}
+
+export default Sidebar;
