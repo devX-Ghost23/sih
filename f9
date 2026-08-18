@@ -1,1 +1,35 @@
+function Select({
+  label,
+  options = [],
+  value,
+  onChange,
+}) {
+  return (
+    <div className="space-y-2">
+      {label && (
+        <label className="text-sm font-medium text-slate-700">
+          {label}
+        </label>
+      )}
 
+      <select
+        value={value}
+        onChange={onChange}
+        className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+      >
+        <option value="">Select</option>
+
+        {options.map((option) => (
+          <option
+            key={option}
+            value={option}
+          >
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+export default Select;
