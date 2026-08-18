@@ -1,1 +1,28 @@
+import Sidebar from "../../components/layout/Sidebar";
+import Topbar from "../../components/layout/Topbar";
 
+function DeclareSurplus() {
+  return (
+    <div className="flex bg-slate-100 min-h-screen">
+      <Sidebar />
+
+      <div className="flex-1 ml-64">
+        <Topbar title="Declare Surplus" />
+
+        <main className="p-8">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+            <h2 className="text-2xl font-bold mb-4">
+              Declare Surplus Credits
+            </h2>
+
+            <p className="text-slate-500">
+              Your Declare Surplus form will appear here.
+            </p>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+export default DeclareSurplus;
