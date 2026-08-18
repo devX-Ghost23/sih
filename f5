@@ -1,1 +1,13 @@
+import { Bell, UserCircle2 } from "lucide-react";
 
+function Topbar({ title = "Dashboard" }) {
+  return (
+    <header className="bg-white shadow-sm h-20 flex items-center justify-between px-8">
+      <h1 className="text-3xl font-bold">{title}</h1>
+
+      {/* Notification & Profile */}
+    </header>
+  );
+}
+
+export default Topbar;
