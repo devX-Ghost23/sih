@@ -1,0 +1,393 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Design tokens
+   Values mirror tailwind.config.ts so utilities and component classes agree.
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+
+  --bg-page: #0b0f14;
+  --bg-panel: #111821;
+  --bg-elevated: #182130;
+  --bg-hover: #1e2939;
+
+  --border: #243041;
+  --border-subtle: #1a2432;
+  --border-strong: #33435a;
+
+  --text-primary: #e6ebf2;
+  --text-secondary: #a5b1c2;
+  --text-muted: #6b788a;
+
+  --accent: #4a8bd4;
+  --accent-hover: #5d9ae0;
+  --accent-muted: #1d3350;
+
+  --success: #3da57a;
+  --warning: #d19a3a;
+  --danger: #d15b5e;
+
+  --radius: 4px;
+  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+
+  --header-height: 3rem;
+  --transition-fast: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-base: 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  html {
+    height: 100%;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    background-color: var(--bg-page);
+  }
+
+  body {
+    min-height: 100dvh;
+    margin: 0;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent-muted);
+    color: var(--text-primary);
+  }
+
+  /* Keyboard focus */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  /* Scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-strong);
+    border: 2px solid var(--bg-page);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+@layer components {
+  /* Skip link (visible on keyboard focus only) */
+  .skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -4rem;
+    z-index: 1000;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    transition: top var(--transition-fast);
+  }
+
+  .skip-link:focus {
+    top: 0.75rem;
+    text-decoration: none;
+  }
+
+  /* Panels */
+  .panel {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-panel);
+    min-width: 0;
+  }
+
+  .panel-elevated {
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-panel);
+    min-width: 0;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .panel-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .panel-body {
+    padding: 0.875rem;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2rem;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.25;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--transition-fast),
+      border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .btn:hover:not(:disabled) {
+    background-color: var(--bg-hover);
+    border-color: var(--border-strong);
+  }
+
+  .btn:active:not(:disabled) {
+    background-color: var(--bg-panel);
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #08111c;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--text-secondary);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--bg-elevated);
+    border-color: var(--border);
+    color: var(--text-primary);
+  }
+
+  .btn-icon {
+    width: 2rem;
+    padding: 0;
+  }
+
+  /* Status indicators */
+  .status-dot {
+    display: inline-block;
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background-color: var(--text-muted);
+  }
+
+  .status-dot-success {
+    background-color: var(--success);
+  }
+
+  .status-dot-warning {
+    background-color: var(--warning);
+  }
+
+  .status-dot-danger {
+    background-color: var(--danger);
+  }
+
+  .status-dot-accent {
+    background-color: var(--accent);
+  }
+
+  .status-dot-pulse {
+    animation: status-pulse 2s ease-in-out infinite;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.0625rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--bg-elevated);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  /* Map container (Leaflet mounts inside this) */
+  .map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 20rem;
+    overflow: hidden;
+    background-color: #0d131b;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .map-container .leaflet-container {
+    width: 100%;
+    height: 100%;
+    background-color: #0d131b;
+    font-family: inherit;
+  }
+
+  .map-grid-backdrop {
+    background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@layer utilities {
+  .text-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: var(--border-subtle);
+  }
+
+  .transition-base {
+    transition-property: color, background-color, border-color, opacity;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
