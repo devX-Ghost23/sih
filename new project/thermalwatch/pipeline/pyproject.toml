@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thermalwatch"
+version = "0.1.0"
+description = "Classification of satellite thermal anomalies into industrial fires, persistent industrial heat, agricultural burning and wildfires (SIH26162)"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "shapely>=2.0",
+    "pyproj>=3.6",
+    "psycopg[binary]>=3.1",
+    "requests>=2.31",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+# Kept separate because these are the ones that can need extra system libraries:
+# xgboost needs libomp on macOS (brew install libomp); rasterio ships wheels for
+# Windows/macOS/Linux but is large. Neither is needed to run the MVP.
+model = ["xgboost>=2.0"]
+raster = ["rasterio>=1.3"]
+excel = ["openpyxl>=3.1"]
+dev = ["pytest>=8.0"]
+all = ["xgboost>=2.0", "rasterio>=1.3", "openpyxl>=3.1", "pytest>=8.0"]
+
+[project.scripts]
+thermalwatch = "thermalwatch.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["thermalwatch*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

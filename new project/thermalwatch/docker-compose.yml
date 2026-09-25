@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: thermal
+      POSTGRES_PASSWORD: thermal
+      POSTGRES_DB: thermalwatch
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U thermal -d thermalwatch"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./api
+    environment:
+      DATABASE_URL: postgresql://thermal:thermal@db:5432/thermalwatch
+    ports: ["8000:8000"]
+    depends_on:
+      db: { condition: service_healthy }
+
+  web:
+    build: ./web
+    ports: ["5173:80"]
+    depends_on: [api]
+
+  # Run tasks with:  python tw.py demo   (or: docker compose run --rm pipeline demo)
+  pipeline:
+    build:
+      context: .
+      dockerfile: pipeline/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://thermal:thermal@db:5432/thermalwatch
+      FIRMS_MAP_KEY: ${FIRMS_MAP_KEY:-}
+    volumes:
+      - ./pipeline/models:/app/pipeline/models
+      - ./data:/data
+    depends_on:
+      db: { condition: service_healthy }
+    profiles: ["tools"]
+
+volumes:
+  pgdata:

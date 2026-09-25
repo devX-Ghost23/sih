@@ -1,0 +1,13 @@
+# Core (needed to run the MVP). Cross-platform wheels exist for all of these.
+pandas>=2.2
+numpy>=1.26
+shapely>=2.0
+pyproj>=3.6
+psycopg[binary]>=3.1
+requests>=2.31
+scikit-learn>=1.4
+
+# Optional, see requirements-optional.txt:
+#   xgboost  (model, off by default; needs libomp on macOS)
+#   rasterio (ESA WorldCover reading)
+#   openpyxl (Global Energy Monitor .xlsx trackers)
